@@ -23,16 +23,23 @@
         
         <!-- The display for the countdown timer -->
         <div id="countdown-display" class="text-3xl sm:text-5xl lg:text-6xl font-mono tracking-wider font-extrabold text-blue-400 flex justify-center space-x-2 sm:space-x-4">
+            <!-- Container for Days -->
             <div class="flex flex-col items-center">
                 <span id="days">00</span>
                 <span class="text-sm font-normal text-gray-400">Days</span>
             </div>
+            <!-- Container for Hours -->
             <div class="flex flex-col items-center">
                 <span id="hours">00</span>
                 <span class="text-sm font-normal text-gray-400">Hours</span>
             </div>
+            <!-- Container for Minutes -->
             <div class="flex flex-col items-center">
                 <span id="minutes">00</span>
+                <span class="text-sm font-normal text-gray-400">Minutes</span>
+            </div>
+            <!-- Container for Seconds -->
+            <div class="flex flex-col items-center">
                 <span id="seconds">00</span>
                 <span class="text-sm font-normal text-gray-400">Seconds</span>
             </div>
@@ -43,7 +50,6 @@
         // Use a window.onload listener to ensure the DOM is fully loaded before the script runs
         window.onload = function() {
             // Set the target date for the Japan trip using ISO 8601 format with UTC ('Z')
-            // This ensures a consistent time zone regardless of the user's location.
             const targetDate = new Date('2025-09-16T00:00:00Z').getTime();
 
             // Get the display elements from the DOM
