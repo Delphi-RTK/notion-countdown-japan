@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japan Trip Countdown</title>
+    <!-- Use Tailwind CSS for a modern and responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Set a global font and a dark background for the body */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* A dark, subtle background color */
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen text-white">
+
+    <!-- Main container for the countdown widget -->
+    <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 w-full max-w-md text-center">
+        <!-- The header for the countdown -->
+        <h1 class="text-3xl font-bold mb-6 text-gray-200">Japan Trip Countdown</h1>
+        
+        <!-- The display for the countdown timer -->
+        <div id="countdown-display" class="text-3xl sm:text-5xl lg:text-6xl font-mono tracking-wider font-extrabold text-blue-400 flex justify-center space-x-2 sm:space-x-4">
+            <div class="flex flex-col items-center">
+                <span id="days">00</span>
+                <span class="text-sm font-normal text-gray-400">Days</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span id="hours">00</span>
+                <span class="text-sm font-normal text-gray-400">Hours</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span id="minutes">00</span>
+                <span class="text-sm font-normal text-gray-400">Minutes</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <span id="seconds">00</span>
+                <span class="text-sm font-normal text-gray-400">Seconds</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set the target date for the Japan trip
+        // The date is September 16, 2024 at midnight (local time)
+        const targetDate = new Date('September 16, 2024 00:00:00').getTime();
+
+        // Get the display elements from the DOM
+        const daysDisplay = document.getElementById('days');
+        const hoursDisplay = document.getElementById('hours');
+        const minutesDisplay = document.getElementById('minutes');
+        const secondsDisplay = document.getElementById('seconds');
+        const countdownContainer = document.getElementById('countdown-display');
+
+        /**
+         * A function to update the countdown display.
+         * It calculates the remaining time and updates the text content of each element.
+         */
+        function updateCountdown() {
+            // Get the current date and time
+            const now = new Date().getTime();
+
+            // Find the distance between now and the target date
+            const distance = targetDate - now;
+
+            // If the countdown is over, display a message
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownContainer.innerHTML = '<span class="text-xl sm:text-2xl text-yellow-300">🎉 It\'s time to go to Japan! 🎉</span>';
+                return;
+            }
+
+            // Calculate days, hours, minutes, and seconds from the distance
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Format numbers to always be two digits
+            const formattedDays = days < 10 ? '0' + days : days;
+            const formattedHours = hours < 10 ? '0' + hours : hours;
+            const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+            const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+
+            // Update the text content of the display elements
+            daysDisplay.textContent = formattedDays;
+            hoursDisplay.textContent = formattedHours;
+            minutesDisplay.textContent = formattedMinutes;
+            secondsDisplay.textContent = formattedSeconds;
+        }
+
+        // Call the function once immediately to show the countdown without a delay
+        updateCountdown();
+
+        // Use setInterval to call the updateCountdown function every second
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
