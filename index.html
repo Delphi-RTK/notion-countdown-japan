@@ -7,41 +7,46 @@
     <!-- Use Tailwind CSS for a modern and responsive design -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Set a global font and a light background for the body, with a subtle cherry blossom theme */
+        /* Set a global font and a dark background for the body */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F7FAFC; /* A very light, soft background color */
+            background-color: #0F172A; /* A very dark background color */
+        }
+        /* Custom translucent style for the countdown card */
+        .translucent-card {
+            background-color: rgba(31, 41, 55, 0.75); /* A semi-transparent dark gray */
+            backdrop-filter: blur(10px); /* Optional: Adds a blur effect for depth */
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen">
+<body class="flex items-center justify-center min-h-screen text-white">
 
-    <!-- Main container for the countdown widget -->
-    <div class="bg-white p-8 rounded-2xl shadow-xl transform transition-all duration-300 hover:scale-105 w-full max-w-md text-center border border-pink-200">
+    <!-- Main container for the countdown widget with a translucent theme -->
+    <div class="translucent-card p-8 rounded-2xl shadow-xl transform transition-all duration-300 hover:scale-105 w-full max-w-md text-center border border-pink-500/20">
         <!-- The header for the countdown -->
-        <h1 class="text-3xl font-bold mb-6 text-pink-600">Japan Trip Countdown</h1>
+        <h1 class="text-3xl font-bold mb-6 text-pink-400">Japan Trip Countdown</h1>
         
         <!-- The display for the countdown timer -->
-        <div id="countdown-display" class="text-3xl sm:text-5xl lg:text-6xl font-mono tracking-wider font-extrabold text-pink-500 flex justify-center space-x-2 sm:space-x-4">
+        <div id="countdown-display" class="text-3xl sm:text-5xl lg:text-6xl font-mono tracking-wider font-extrabold text-pink-300 flex justify-center space-x-2 sm:space-x-4">
             <!-- Container for Days -->
             <div class="flex flex-col items-center">
                 <span id="days">00</span>
-                <span class="text-sm font-normal text-gray-500">Days</span>
+                <span class="text-sm font-normal text-gray-400">Days</span>
             </div>
             <!-- Container for Hours -->
             <div class="flex flex-col items-center">
                 <span id="hours">00</span>
-                <span class="text-sm font-normal text-gray-500">Hours</span>
+                <span class="text-sm font-normal text-gray-400">Hours</span>
             </div>
             <!-- Container for Minutes -->
             <div class="flex flex-col items-center">
                 <span id="minutes">00</span>
-                <span class="text-sm font-normal text-gray-500">Minutes</span>
+                <span class="text-sm font-normal text-gray-400">Minutes</span>
             </div>
             <!-- Container for Seconds -->
             <div class="flex flex-col items-center">
                 <span id="seconds">00</span>
-                <span class="text-sm font-normal text-gray-500">Seconds</span>
+                <span class="text-sm font-normal text-gray-400">Seconds</span>
             </div>
         </div>
     </div>
@@ -72,7 +77,7 @@
             // If the countdown is over, display a message
             if (distance < 0) {
                 clearInterval(countdownInterval);
-                countdownContainer.innerHTML = '<span class="text-xl sm:text-2xl text-pink-600">🎉 It\'s time to go to Japan! 🎉</span>';
+                countdownContainer.innerHTML = '<span class="text-xl sm:text-2xl text-pink-400">🎉 It\'s time to go to Japan! 🎉</span>';
                 return;
             }
 
