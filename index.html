@@ -47,61 +47,59 @@
     </div>
 
     <script>
-        // Use a window.onload listener to ensure the DOM is fully loaded before the script runs
-        window.onload = function() {
-            // Set the target date for the Japan trip using ISO 8601 format with UTC ('Z')
-            const targetDate = new Date('2025-09-16T00:00:00Z').getTime();
+        // Set the target date for the Japan trip using Date.UTC for robust, consistent time zone handling.
+        // Months are 0-indexed, so 8 is September.
+        const targetDate = new Date(Date.UTC(2025, 8, 16, 0, 0, 0, 0)).getTime();
 
-            // Get the display elements from the DOM
-            const daysDisplay = document.getElementById('days');
-            const hoursDisplay = document.getElementById('hours');
-            const minutesDisplay = document.getElementById('minutes');
-            const secondsDisplay = document.getElementById('seconds');
-            const countdownContainer = document.getElementById('countdown-display');
+        // Get the display elements from the DOM
+        const daysDisplay = document.getElementById('days');
+        const hoursDisplay = document.getElementById('hours');
+        const minutesDisplay = document.getElementById('minutes');
+        const secondsDisplay = document.getElementById('seconds');
+        const countdownContainer = document.getElementById('countdown-display');
 
-            /**
-             * A function to update the countdown display.
-             * It calculates the remaining time and updates the text content of each element.
-             */
-            function updateCountdown() {
-                // Get the current date and time
-                const now = new Date().getTime();
+        /**
+         * A function to update the countdown display.
+         * It calculates the remaining time and updates the text content of each element.
+         */
+        function updateCountdown() {
+            // Get the current date and time
+            const now = new Date().getTime();
 
-                // Find the distance between now and the target date
-                const distance = targetDate - now;
+            // Find the distance between now and the target date
+            const distance = targetDate - now;
 
-                // If the countdown is over, display a message
-                if (distance < 0) {
-                    clearInterval(countdownInterval);
-                    countdownContainer.innerHTML = '<span class="text-xl sm:text-2xl text-yellow-300">🎉 It\'s time to go to Japan! 🎉</span>';
-                    return;
-                }
-
-                // Calculate days, hours, minutes, and seconds from the distance
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                // Format numbers to always be two digits
-                const formattedDays = days < 10 ? '0' + days : days;
-                const formattedHours = hours < 10 ? '0' + hours : hours;
-                const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
-                const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
-
-                // Update the text content of the display elements
-                daysDisplay.textContent = formattedDays;
-                hoursDisplay.textContent = formattedHours;
-                minutesDisplay.textContent = formattedMinutes;
-                secondsDisplay.textContent = formattedSeconds;
+            // If the countdown is over, display a message
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownContainer.innerHTML = '<span class="text-xl sm:text-2xl text-yellow-300">🎉 It\'s time to go to Japan! 🎉</span>';
+                return;
             }
 
-            // Call the function once immediately to show the countdown without a delay
-            updateCountdown();
+            // Calculate days, hours, minutes, and seconds from the distance
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Use setInterval to call the updateCountdown function every second
-            const countdownInterval = setInterval(updateCountdown, 1000);
-        };
+            // Format numbers to always be two digits
+            const formattedDays = days < 10 ? '0' + days : days;
+            const formattedHours = hours < 10 ? '0' + hours : hours;
+            const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+            const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+
+            // Update the text content of the display elements
+            daysDisplay.textContent = formattedDays;
+            hoursDisplay.textContent = formattedHours;
+            minutesDisplay.textContent = formattedMinutes;
+            secondsDisplay.textContent = formattedSeconds;
+        }
+
+        // Call the function once immediately to show the countdown without a delay
+        updateCountdown();
+
+        // Use setInterval to call the updateCountdown function every second
+        const countdownInterval = setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
